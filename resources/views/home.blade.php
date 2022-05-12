@@ -2,14 +2,18 @@
 
 @section('content')
 <div class="wrapper">
+    @if($data->is_video == 1)
     <div class="frame-container">
         <iframe title="Gojek - The Flow" frameborder="0" allow="autoplay; encrypted-media;" allowfullscreen
             data-player-status="playing" data-ll-status="loaded" scrolling="no" height="100%" width="100%"
             allowtransparency="true"
-            src="https://www.youtube.com/embed/VJH5FJ5kaJA?enablejsapi=1&version=3&controls=0&rel=0&autoplay=1&loop=1&mute=1&playlist=VJH5FJ5kaJA&playsinline=1"
+            src="https://www.youtube.com/embed/{{$data->file}}?enablejsapi=1&version=3&controls=0&rel=0&autoplay=1&loop=1&mute=1&playlist={{$data->file}}&playsinline=1"
             id="ytplayer-58a818">
         </iframe>
     </div>
+    @else
+    <img style="display:block; width:100%; height:100%; object-fit: contain;" src="{{$data->file}}" alt="data 404">
+    @endif
 </div>
 <!-- Content section 1-->
 <section id="company" class="text-light bg-dark">
