@@ -39,7 +39,7 @@
     <div id="app">
         <nav class="navbar fixed-top navbar-expand-md navbar-dark shadow-sm">
             <div class="container-fluid">
-                <a class="navbar-brand" href="{{ url('/home') }}">
+                <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Company Name') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"

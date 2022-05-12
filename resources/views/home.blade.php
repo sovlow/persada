@@ -16,7 +16,7 @@
     @endif
 </div>
 <!-- Content section 1-->
-@foreach($data_cont as $dc)
+@foreach($data_content as $dc)
 @if($dc->pages->name == 'company')
 <section id="company" class="text-light bg-dark">
     <div class="container px-5">
@@ -26,7 +26,7 @@
             </div>
             <div class="col-lg-6 {{ $loop->index%2==0?'order-lg-1':'' }}">
                 <div class="p-5">
-                    <h2 class="display-4">History</h2>
+                    <h2 class="display-4">{{$dc->title}}</h2>
                     <p>{{$dc->description}}</p>
                 </div>
             </div>
@@ -38,7 +38,7 @@
 
 <div id="business" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
-        @foreach($data_cont as $dc)
+        @foreach($data_content as $dc)
         @if($dc->pages->name == 'business')
         <div class="carousel-item {{ $loop->index==1?'active':'' }}">
             <img src="{{$dc->image}}" class="d-block w-100" alt="...">
@@ -63,10 +63,8 @@
 <!--Section: Contact v.2-->
 <div class="bg-dark" id="help" style="padding-top: 10%; padding-bottom:15%">
     <section class="container-xxl text-light">
-        <h2 class="h1-responsive font-weight-bold text-center">Contact us</h2>
-        <p class="text-center w-responsive mx-auto mb-5">Do you have any questions? Please do not hesitate to contact us
-            directly. Our team will come back to you within
-            a matter of hours to help you.</p>
+        <h2 class="h1-responsive font-weight-bold text-center">Kontak Kami</h2>
+        <p class="text-center w-responsive mx-auto mb-5">{{ $data_contact->description }}</p>
         <div class="row">
             <div class="col-md-9 mb-md-0 mb-5">
                 <form id="contact-form" name="contact-form" action="mail.php" method="POST">
@@ -111,15 +109,13 @@
             <div class="col-md-3 text-center">
                 <ul class="list-unstyled mb-0">
                     <li><i class="fas fa-map-marker-alt fa-2x"></i>
-                        <p>San Francisco, CA 94126, USA</p>
+                        <p>{{ $data_contact->location }}</p>
                     </li>
-
                     <li><i class="fas fa-phone mt-4 fa-2x"></i>
-                        <p>+ 01 234 567 89</p>
+                        <p>{{ $data_contact->number }}</p>
                     </li>
-
                     <li><i class="fas fa-envelope mt-4 fa-2x"></i>
-                        <p>contact@mdbootstrap.com</p>
+                        <p>{{ $data_contact->email }}</p>
                     </li>
                 </ul>
             </div>
