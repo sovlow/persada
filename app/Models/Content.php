@@ -15,4 +15,9 @@ class Content extends Model
         'description',
         'page',
     ];
+
+    public function pages(){
+        return $this->belongsTo(Page::class, 'page', 'id');
+    }
+
 }

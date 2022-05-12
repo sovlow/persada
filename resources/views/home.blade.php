@@ -2,105 +2,59 @@
 
 @section('content')
 <div class="wrapper">
-    @if($data->is_video == 1)
+    @if($data_dash->is_video??'1' == 1)
     <div class="frame-container">
         <iframe title="Gojek - The Flow" frameborder="0" allow="autoplay; encrypted-media;" allowfullscreen
             data-player-status="playing" data-ll-status="loaded" scrolling="no" height="100%" width="100%"
             allowtransparency="true"
-            src="https://www.youtube.com/embed/{{$data->file}}?enablejsapi=1&version=3&controls=0&rel=0&autoplay=1&loop=1&mute=1&playlist={{$data->file}}&playsinline=1"
+            src="https://www.youtube.com/embed/{{$data_dash->file??'VV9BZC7-Ss8'}}?enablejsapi=1&version=3&controls=0&rel=0&autoplay=1&loop=1&mute=1&playlist={{$data_dash->file??'VV9BZC7-Ss8'}}&playsinline=1"
             id="ytplayer-58a818">
         </iframe>
     </div>
     @else
-    <img style="display:block; width:100%; height:100%; object-fit: contain;" src="{{$data->file}}" alt="data 404">
+    <img style="display:block; width:100%; height:100%; object-fit: contain;" src="{{$data->file??''}}" alt="data 404">
     @endif
 </div>
 <!-- Content section 1-->
+@foreach($data_cont as $dc)
+@if($dc->pages->name == 'company')
 <section id="company" class="text-light bg-dark">
     <div class="container px-5">
         <div class="row gx-5 align-items-center">
-            <div class="col-lg-6 order-lg-2">
-                <div class="p-5"><img class="img-fluid rounded-circle" src="assets/img/01.jpg" alt="..." /></div>
+            <div class="col-lg-6 {{ $loop->index%2==0?'order-lg-2':'' }}">
+                <div class="p-5"><img class="img-fluid rounded-circle" src="{{$dc->image}}" alt="..." /></div>
             </div>
-            <div class="col-lg-6 order-lg-1">
+            <div class="col-lg-6 {{ $loop->index%2==0?'order-lg-1':'' }}">
                 <div class="p-5">
                     <h2 class="display-4">History</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit
-                        iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione
-                        voluptatum molestiae adipisci, beatae obcaecati.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container px-5">
-        <div class="row gx-5 align-items-center">
-            <div class="col-lg-6">
-                <div class="p-5"><img class="img-fluid rounded-circle" src="assets/img/02.jpg" alt="..." /></div>
-            </div>
-            <div class="col-lg-6">
-                <div class="p-5">
-                    <h2 class="display-4">Portfolio</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit
-                        iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione
-                        voluptatum molestiae adipisci, beatae obcaecati.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container px-5">
-        <div class="row gx-5 align-items-center">
-            <div class="col-lg-6 order-lg-2">
-                <div class="p-5"><img class="img-fluid rounded-circle" src="assets/img/03.jpg" alt="..." /></div>
-            </div>
-            <div class="col-lg-6 order-lg-1">
-                <div class="p-5">
-                    <h2 class="display-4">Sertifikasi</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit
-                        iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione
-                        voluptatum molestiae adipisci, beatae obcaecati.</p>
+                    <p>{{$dc->description}}</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
+@endif
+@endforeach
 
 <div id="business" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
-            aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
-            aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
-            aria-label="Slide 3"></button>
-    </div>
     <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="assets/img/01.jpg" class="d-block w-100" alt="...">
+        @foreach($data_cont as $dc)
+        @if($dc->pages->name == 'business')
+        <div class="carousel-item {{ $loop->index==1?'active':'' }}">
+            <img src="{{$dc->image}}" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
-                <h5>Produk 1</h5>
-                <p>Tentang Produk 1</p>
+                <h5>{{$dc->title}}</h5>
+                <p>{{$dc->description}}</p>
             </div>
         </div>
-        <div class="carousel-item">
-            <img src="assets/img/02.jpg" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block">
-                <h5>Produk 2</h5>
-                <p>Tentang Produk 2</p>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <img src="assets/img/03.jpg" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block">
-                <h5>Produk 3</h5>
-                <p>Tentang Produk 3</p>
-            </div>
-        </div>
+        @endif
+        @endforeach
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+    <button class="carousel-control-prev" type="button" data-bs-target="#{{ $dc->pages->name }}" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
     </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+    <button class="carousel-control-next" type="button" data-bs-target="#{{ $dc->pages->name }}" data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
     </button>
@@ -108,47 +62,28 @@
 
 <!--Section: Contact v.2-->
 <div class="bg-dark" id="help" style="padding-top: 10%; padding-bottom:15%">
-
     <section class="container-xxl text-light">
-
-        <!--Section heading-->
         <h2 class="h1-responsive font-weight-bold text-center">Contact us</h2>
-        <!--Section description-->
         <p class="text-center w-responsive mx-auto mb-5">Do you have any questions? Please do not hesitate to contact us
             directly. Our team will come back to you within
             a matter of hours to help you.</p>
-
         <div class="row">
-
-            <!--Grid column-->
             <div class="col-md-9 mb-md-0 mb-5">
                 <form id="contact-form" name="contact-form" action="mail.php" method="POST">
-
-                    <!--Grid row-->
                     <div class="row">
-
-                        <!--Grid column-->
                         <div class="col-md-6">
                             <div class="md-form mb-0">
                                 <input type="text" id="name" name="name" class="form-control">
                                 <label for="name" class="">Your name</label>
                             </div>
-                        </div>
-                        <!--Grid column-->
-
-                        <!--Grid column-->
+                        </div>                        
                         <div class="col-md-6">
                             <div class="md-form mb-0">
                                 <input type="text" id="email" name="email" class="form-control">
                                 <label for="email" class="">Your email</label>
                             </div>
                         </div>
-                        <!--Grid column-->
-
-                    </div>
-                    <!--Grid row-->
-
-                    <!--Grid row-->
+                    </div>   
                     <div class="row">
                         <div class="col-md-12">
                             <div class="md-form mb-0">
@@ -157,14 +92,8 @@
                             </div>
                         </div>
                     </div>
-                    <!--Grid row-->
-
-                    <!--Grid row-->
                     <div class="row">
-
-                        <!--Grid column-->
                         <div class="col-md-12">
-
                             <div class="md-form">
                                 <textarea type="text" id="message" name="message" rows="2"
                                     class="form-control md-textarea"></textarea>
@@ -173,18 +102,12 @@
 
                         </div>
                     </div>
-                    <!--Grid row-->
-
                 </form>
-
                 <div class="text-center text-md-left">
                     <a class="btn btn-primary" onclick="document.getElementById('contact-form').submit();">Send</a>
                 </div>
                 <div class="status"></div>
             </div>
-            <!--Grid column-->
-
-            <!--Grid column-->
             <div class="col-md-3 text-center">
                 <ul class="list-unstyled mb-0">
                     <li><i class="fas fa-map-marker-alt fa-2x"></i>
@@ -200,12 +123,8 @@
                     </li>
                 </ul>
             </div>
-            <!--Grid column-->
-
         </div>
-
     </section>
-    <!--Section: Contact v.2-->
 </div>
 
 <style>
